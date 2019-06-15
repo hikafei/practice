@@ -23,7 +23,7 @@ public class BagHelper {
      * @param vs 物品的价值
      */
     public int packZeroOneWithFull(int v, int[] ws, int[] vs) {
-        if (v <= 0 || ws == null || ws.length == 0 || vs == null || vs.length == 0 || (ws.length != vs.length)) {
+        if (v <= 0 || ws == null || vs == null || vs.length == 0 || (ws.length != vs.length)) {
             return 0;
         }
         int goodCount = ws.length;
@@ -50,7 +50,7 @@ public class BagHelper {
      * 01背包,背包不要求全部装满的最大价值
      */
     public int packZeroOneWithoutFull(int v, int[] ws, int[] vs) {
-        if (v <= 0 || ws == null || ws.length == 0 || vs == null || vs.length == 0 || (ws.length != vs.length)) {
+        if (v <= 0 || ws == null || vs == null || vs.length == 0 || (ws.length != vs.length)) {
             return 0;
         }
         int goodCount = ws.length;
@@ -69,14 +69,9 @@ public class BagHelper {
 
     /**
      * 01背包,背包不要求全部装满的最大价值，且过程中，打印满足最大价值的所有情况
-     *
-     * @param v
-     * @param ws
-     * @param vs
-     * @return
      */
     public int packZeroOneWithoutFullAndPrint(int v, int[] ws, int[] vs) {
-        if (v <= 0 || ws == null || ws.length == 0 || vs == null || vs.length == 0 || (ws.length != vs.length)) {
+        if (v <= 0 || ws == null || vs == null || vs.length == 0 || (ws.length != vs.length)) {
             return 0;
         }
         int goodCount = ws.length;
@@ -124,14 +119,9 @@ public class BagHelper {
 
     /**
      * 完全背包,背包不要求全部装满的最大价值，且过程中，打印满足最大价值的所有情况
-     *
-     * @param v
-     * @param ws
-     * @param vs
-     * @return
      */
     public int packCompleteWithoutFullAndPrint(int v, int[] ws, int[] vs) {
-        if (v <= 0 || ws == null || ws.length == 0 || vs == null || vs.length == 0 || (ws.length != vs.length)) {
+        if (v <= 0 || ws == null || vs == null || vs.length == 0 || (ws.length != vs.length)) {
             return 0;
         }
         int goodCount = ws.length;
@@ -179,10 +169,9 @@ public class BagHelper {
 
     /**
      * @param ns 物品的个数限制,不要求恰好装满
-     * @return
      */
     public int packMany(int v, int[] ws, int[] vs, int[] ns) {
-        if (v <= 0 || ws == null || ws.length == 0 || vs == null || vs.length == 0 || ns == null || ns.length == 0 || (ws.length != vs.length)) {
+        if (v <= 0 || ws == null || vs == null || vs.length == 0 || ns == null || ns.length == 0 || (ws.length != vs.length)) {
             return 0;
         }
 
@@ -193,9 +182,9 @@ public class BagHelper {
         for (int i = 0; i < oldLength; i++) {
             List<int[]> temp = getManyNumbers(ws[i], vs[i], ns[i]);
             if (temp.size() > 0) {
-                for (int j = 0; j < temp.size(); j++) {
-                    wsList.add(temp.get(j)[0]);
-                    vsList.add(temp.get(j)[1]);
+                for (int[] ints : temp) {
+                    wsList.add(ints[0]);
+                    vsList.add(ints[1]);
                 }
             }
         }
@@ -220,11 +209,9 @@ public class BagHelper {
     private List<int[]> getManyNumbers(int weight, int value, int number) {
         if (number <= 0) return new ArrayList<>();
         List<int[]> result = new ArrayList<>();
-        int i = 1;
         int product = 1;
         while (product <= number) {
             result.add(new int[]{weight, value});
-            i++;
             product *= 2;
             weight *= 2;
             value *= 2;
