@@ -12,11 +12,11 @@ public class ArrayHelper {
     /**
      * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
      * 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
-     *
+     * <p>
      * 思路think:
      * 1 使用Map记录数组中每一项的下标
      * 2 遍历nums，利用Map的keys是否包含target-nums[i],包含的话 遍历的当前下标i与map对应项值j即为结果，和为target
-     *
+     * <p>
      * 复杂度cal:
      * 时O(n),空O(n)
      */
@@ -43,10 +43,10 @@ public class ArrayHelper {
      * 给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
      * 请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
      * 你可以假设 nums1 和 nums2 不会同时为空。
-     *
+     * <p>
      * think:
      * 构造有序新数组array，包含nums1和nums2。然后根据length求中位数
-     *
+     * <p>
      * cal
      * O(m+n) 不满足要求
      */
@@ -84,11 +84,11 @@ public class ArrayHelper {
 
     /**
      * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。
-     *
+     * <p>
      * think:
-     *  前偶后奇数就交换 O(n2)
+     * 前偶后奇数就交换 O(n2)
      * other:
-     *  定义两个list，遍历array，第一个list保存奇数，第二个list保存偶数，遍历完之后，根据两个list回写array。 o(n)
+     * 定义两个list，遍历array，第一个list保存奇数，第二个list保存偶数，遍历完之后，根据两个list回写array。 o(n)
      */
     public void reOrderArray(int[] array) {
         int temp = 0;
@@ -984,5 +984,34 @@ public class ArrayHelper {
             }
         }
         return result;
+    }
+
+    /**
+     * 峰值元素是指其值大于左右相邻值的元素。
+     * 给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。
+     * 数组可能包含多个峰值，在这种情况下，返回任何一个峰值所在位置即可。
+     * 可以假设 nums[-1] = nums[n] = -∞。
+     */
+    public int findPeakElement(int[] nums) {
+        if (nums == null || nums.length < 1) return -1;
+        int length = nums.length;
+        if (length == 1) return 0;
+        if (nums[0] > nums[1]) return 0;
+        if (nums[length - 1] > nums[length - 2]) return length - 1;
+        return handlePeak(nums, 1, length - 2);
+    }
+
+    private int handlePeak(int[] nums, int left, int right) {
+        while (left < right) {
+            int middle = (left + right) / 2;
+            if (nums[middle] > nums[middle - 1] && nums[middle] > nums[middle + 1]) {
+                return middle;
+            } else if (nums[middle] > nums[middle - 1]) {
+                return handlePeak(nums, middle + 1, right);
+            } else {
+                return handlePeak(nums, left, middle - 1);
+            }
+        }
+        return left;
     }
 }
