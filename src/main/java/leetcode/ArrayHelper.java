@@ -1014,4 +1014,30 @@ public class ArrayHelper {
         }
         return left;
     }
+
+    /**
+     * 查找一个数组的最大数和最小数
+     */
+    public int[] maxAndMin(int[] nums) {
+        if (nums == null || nums.length == 0) return null;
+        int[] result = mam(nums,0,nums.length-1);
+        return result;
+    }
+
+    private int[] mam(int[] nums, int left, int right) {
+        if (right - left == 0) return new int[]{nums[right], nums[right]};
+        else if (right - left == 1)
+            return nums[left] >= nums[right] ? new int[]{nums[left], nums[right]} : new int[]{nums[right], nums[left]};
+        else {
+            int middle = (left + right) / 2;
+            int[] result = combile(mam(nums,left,middle),mam(nums,middle+1,right));
+            return result;
+        }
+    }
+
+    private int[] combile(int[] a, int[] b) {
+        a[0] = Math.max(a[0], b[0]);
+        a[1] = Math.min(a[1], b[1]);
+        return a;
+    }
 }
