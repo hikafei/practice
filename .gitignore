@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/workspace.xml
+practice.iml
+src/main/java/pattern/action/
+src/main/java/pattern/create/factory/kit/
+src/main/java/pattern/struct/

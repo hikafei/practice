@@ -16,13 +16,13 @@ public class MergeSortHelper implements ISortHelper {
         ArrayPrintHelper.work(arr);
     }
 
-    private int[] sort(int[] arr){
+    private int[] sort(int[] arr) {
         int length = arr.length;
-        if(length==1) return arr;
+        if (length == 1) return arr;
         int middle = length / 2;
         int[] left = Arrays.copyOfRange(arr, 0, middle);
         int[] right = Arrays.copyOfRange(arr, middle, length);
-        arr = merge(sort(left),sort(right));
+        arr = merge(sort(left), sort(right));
         return arr;
     }
 
@@ -31,14 +31,14 @@ public class MergeSortHelper implements ISortHelper {
         int length = left.length + right.length;
         int[] result = new int[length];
         int index = 0, lp = 0, rp = 0;
-        while(index<length){
-            if(lp>=left.length) {
+        while (index < length) {
+            if (lp >= left.length) {
                 result[index++] = right[rp++];
-            } else if(rp>=right.length){
+            } else if (rp >= right.length) {
                 result[index++] = left[lp++];
-            } else if(left[lp]<right[rp]){
+            } else if (left[lp] < right[rp]) {
                 result[index++] = left[lp++];
-            } else{
+            } else {
                 result[index++] = right[rp++];
             }
         }

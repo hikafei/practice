@@ -11,18 +11,17 @@ package learn.sort;
 public class InsertionSortHelper implements ISortHelper {
     @Override
     public void work(int[] arr) {
-        if(arr==null||arr.length<2)return;
+        if (arr == null || arr.length < 2) return;
         int length = arr.length;
-        for (int i =1;i<length;i++){
+        for (int i = 1; i < length; i++) {
             int temp = arr[i];
-            for(int j =i-1;j>=0;j--){
-                if(temp>arr[j]) {
-                    arr[j+1] = temp;
+            for (int j = i - 1; j >= 0; j--) {
+                if (temp > arr[j]) {
+                    arr[j + 1] = temp;
                     break;
-                }
-                else {
-                    arr[j+1] = arr[j];
-                    if(j==0){
+                } else {
+                    arr[j + 1] = arr[j];
+                    if (j == 0) {
                         arr[0] = temp;
                     }
                 }

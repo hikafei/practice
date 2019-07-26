@@ -405,7 +405,6 @@ public class ArrayHelper {
      * ]
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        Arrays.sort(candidates);
         if (candidates != null || candidates.length > 0) {
             combinationSumWork(candidates, 0, target, new ArrayList<Integer>(), 0);
         }
@@ -422,7 +421,7 @@ public class ArrayHelper {
             combinationSumList.add(list);
             return;
         }
-        for (int i = numbers.length - 1; i >= index; i--) {
+        for (int i = index+1; i < numbers.length; i++) {
             List<Integer> temp = new ArrayList<>(list);
             temp.add(numbers[i]);
             combinationSumWork(numbers, sum + numbers[i], target, temp, i);
@@ -1020,7 +1019,7 @@ public class ArrayHelper {
      */
     public int[] maxAndMin(int[] nums) {
         if (nums == null || nums.length == 0) return null;
-        int[] result = mam(nums,0,nums.length-1);
+        int[] result = mam(nums, 0, nums.length - 1);
         return result;
     }
 
@@ -1030,7 +1029,7 @@ public class ArrayHelper {
             return nums[left] >= nums[right] ? new int[]{nums[left], nums[right]} : new int[]{nums[right], nums[left]};
         else {
             int middle = (left + right) / 2;
-            int[] result = combile(mam(nums,left,middle),mam(nums,middle+1,right));
+            int[] result = combile(mam(nums, left, middle), mam(nums, middle + 1, right));
             return result;
         }
     }
